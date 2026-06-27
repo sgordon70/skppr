@@ -648,7 +648,7 @@
 
         <div class="field">
           <label>Your Website URL</label>
-          <input type="url" name="url" placeholder="https://yoursite.com" required>
+          <input type="text" name="url" placeholder="https://yoursite.com" required>
         </div>
 
         <div class="field">
@@ -758,18 +758,30 @@
     btn.textContent = 'Sending...';
 
     var form = e.target;
+
+    // Auto-prepend https:// if missing, then validate
+    var rawUrl = form.url.value.trim();
+    if (rawUrl && !/^https?:\/\//i.test(rawUrl)) {
+      rawUrl = 'https://' + rawUrl;
+    }
+    try { new URL(rawUrl); } catch(_) {
+      alert('Please enter a valid website URL (e.g. https://yoursite.com)');
+      btn.disabled = false;
+      btn.textContent = 'Submit for Review →';
+      return;
+    }
+
     var data = {
       name: form.name.value,
       email: form.email.value,
-      url: form.url.value,
+      url: rawUrl,
       siteName: form.siteName.value,
       category: form.category.value,
       plan: form.plan.value,
       description: form.description.value
     };
 
-    // Send via Formspree — replace YOUR_FORM_ID with your actual Formspree form ID
-    fetch('https://formspree.io/f/YOUR_FORM_ID', {
+    fetch('https://formspree.io/f/mojoweyw', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(data)
