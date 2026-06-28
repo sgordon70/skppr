@@ -11,9 +11,11 @@
     --bg: #0a0a0f;
     --surface: #13131a;
     --accent: #6c63ff;
+    --accent2: #ff6584;
     --text: #f0f0f8;
     --muted: #6b6b8a;
     --border: #2a2a3d;
+    --success: #63ffb4;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -53,7 +55,7 @@
   .nav-link:hover { color: var(--text); }
 
   .page {
-    max-width: 560px;
+    max-width: 520px;
     margin: 0 auto;
     padding: 4rem 2rem 5rem;
     text-align: center;
@@ -77,7 +79,10 @@
     margin-bottom: 0.75rem;
   }
 
-  h1 em { font-style: normal; color: var(--accent); }
+  h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
 
   .sub {
     font-size: 1rem;
@@ -87,6 +92,7 @@
     margin: 0 auto 3rem;
   }
 
+  /* FEATURES */
   .features {
     display: flex;
     flex-direction: column;
@@ -104,62 +110,26 @@
     border-radius: 12px;
     padding: 1rem 1.25rem;
     font-size: 0.95rem;
+    color: var(--text);
   }
 
-  .feature-icon { font-size: 1.25rem; flex-shrink: 0; }
-
-  .feature-text strong { display: block; font-weight: 600; margin-bottom: 0.1rem; }
-  .feature-text span { font-size: 0.825rem; color: var(--muted); }
-
-  /* Pricing toggle */
-  .toggle-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    font-size: 0.875rem;
+  .feature-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
   }
 
-  .toggle-label { color: var(--muted); }
-  .toggle-label.active { color: var(--text); font-weight: 600; }
-
-  .save-badge {
-    background: rgba(99,255,180,0.15);
-    color: #63ffb4;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border-radius: 100px;
+  .feature-text strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.1rem;
   }
 
-  .toggle {
-    width: 44px;
-    height: 24px;
-    background: var(--accent);
-    border-radius: 100px;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    transition: background 0.15s;
+  .feature-text span {
+    font-size: 0.825rem;
+    color: var(--muted);
   }
 
-  .toggle::after {
-    content: '';
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    background: white;
-    border-radius: 50%;
-    top: 3px;
-    left: 3px;
-    transition: transform 0.15s;
-  }
-
-  .toggle.monthly::after { transform: translateX(20px); }
-
+  /* PRICING */
   .price-card {
     background: var(--surface);
     border: 1.5px solid var(--accent);
@@ -193,7 +163,11 @@
     margin-bottom: 0.25rem;
   }
 
-  .price-period { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.75rem; }
+  .price-period {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1.75rem;
+  }
 
   .cta-btn {
     display: block;
@@ -212,6 +186,12 @@
     text-align: center;
   }
   .cta-btn:hover { background: #7d75ff; transform: translateY(-1px); }
+
+  .guarantee {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.85rem;
+  }
 
   footer {
     border-top: 1px solid var(--border);
@@ -274,18 +254,12 @@
     </div>
   </div>
 
-  <!-- Pricing toggle -->
-  <div class="toggle-wrap">
-    <span class="toggle-label" id="label-annual">Annual <span class="save-badge">Save 20%</span></span>
-    <button class="toggle" id="toggleBtn" onclick="switchPlan()"></button>
-    <span class="toggle-label monthly active" id="label-monthly">Monthly</span>
-  </div>
-
   <div class="price-card">
     <div class="price-badge">Most Popular</div>
-    <div class="price-amount" id="priceAmount">$3<span style="font-size:1.5rem">/mo</span></div>
-    <div class="price-period" id="pricePeriod">Billed monthly · cancel anytime</div>
-    <a href="https://buy.stripe.com/7sY8wO45jaL98xQ42Tgw000" class="cta-btn" id="proBtn">Get Skppr Pro →</a>
+    <div class="price-amount">$3<span style="font-size:1.5rem">/mo</span></div>
+    <div class="price-period">$36 billed annually · cancel anytime</div>
+    <a href="#" class="cta-btn" id="proBtn">Get Skppr Pro →</a>
+    <p class="guarantee">30-day money-back guarantee. No questions asked.</p>
   </div>
 </div>
 
@@ -296,35 +270,11 @@
 </footer>
 
 <script>
-  var isMonthly = true;
-  var monthlyLink = 'https://buy.stripe.com/7sY8wO45jaL98xQ42Tgw000';
-  var annualLink = 'https://buy.stripe.com/4gM14mfO1bPd5lEeHxgw004';
-
-  function switchPlan() {
-    isMonthly = !isMonthly;
-    var btn = document.getElementById('toggleBtn');
-    var amount = document.getElementById('priceAmount');
-    var period = document.getElementById('pricePeriod');
-    var proBtn = document.getElementById('proBtn');
-    var labelMonthly = document.getElementById('label-monthly');
-    var labelAnnual = document.getElementById('label-annual');
-
-    if (isMonthly) {
-      btn.classList.add('monthly');
-      amount.innerHTML = '$3<span style="font-size:1.5rem">/mo</span>';
-      period.textContent = 'Billed monthly · cancel anytime';
-      proBtn.href = monthlyLink;
-      labelMonthly.classList.add('active');
-      labelAnnual.classList.remove('active');
-    } else {
-      btn.classList.remove('monthly');
-      amount.innerHTML = '$29<span style="font-size:1.5rem">/yr</span>';
-      period.textContent = 'Billed annually · cancel anytime';
-      proBtn.href = annualLink;
-      labelAnnual.classList.add('active');
-      labelMonthly.classList.remove('active');
-    }
-  }
+  // Wire up to Stripe when ready — replace href="#" on proBtn with your Stripe payment link
+  document.getElementById('proBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    alert('Pro coming soon! Drop your email at scott@blackhookgroup.com to get early access.');
+  });
 </script>
 </body>
 </html>
