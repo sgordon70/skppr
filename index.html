@@ -28,7 +28,6 @@
     min-height: 100vh;
   }
 
-  /* NAV */
   nav {
     display: flex;
     align-items: center;
@@ -55,17 +54,13 @@
   }
   .nav-link:hover { color: var(--text); }
 
-  /* LAYOUT */
   .page {
-    max-width: 560px;
+    max-width: 640px;
     margin: 0 auto;
     padding: 4rem 2rem 5rem;
   }
 
-  /* HEADLINE */
-  .headline {
-    margin-bottom: 2.5rem;
-  }
+  .headline { margin-bottom: 2.5rem; }
 
   .eyebrow {
     font-size: 0.7rem;
@@ -85,18 +80,74 @@
     margin-bottom: 0.75rem;
   }
 
-  h1 em {
-    font-style: normal;
-    color: var(--accent);
+  h1 em { font-style: normal; color: var(--accent); }
+
+  .sub { font-size: 1rem; color: var(--muted); line-height: 1.65; }
+
+  /* Tiers */
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
   }
 
-  .sub {
-    font-size: 1rem;
+  .tier {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+
+  .tier:hover { border-color: var(--accent); }
+  .tier.selected { border-color: var(--accent); background: rgba(108,99,255,0.08); }
+
+  .tier-name {
+    font-size: 0.8rem;
+    font-weight: 700;
     color: var(--muted);
-    line-height: 1.65;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.25rem;
   }
 
-  /* FORM CARD */
+  .tier-price {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .tier-period { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.75rem; }
+
+  .tier-feature {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .tier.selected .tier-name { color: var(--accent); }
+  .tier.featured { border-color: var(--accent); }
+  .tier-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.65rem;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  /* Form */
   .form-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -135,9 +186,7 @@
   .field input:focus,
   .field select:focus,
   .field textarea:focus { border-color: var(--accent); }
-
-  .field input::placeholder,
-  .field textarea::placeholder { color: var(--muted); }
+  .field input::placeholder, .field textarea::placeholder { color: var(--muted); }
 
   .field select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6b8a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
@@ -149,11 +198,7 @@
   .field select option { background: var(--surface); }
   .field textarea { resize: vertical; min-height: 90px; }
 
-  .field-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
   .submit-btn {
     width: 100%;
@@ -180,14 +225,12 @@
     line-height: 1.5;
   }
 
-  /* SUCCESS */
   .success-msg { display: none; text-align: center; padding: 2rem 0; }
   .success-msg.show { display: block; }
   .success-icon { font-size: 3rem; margin-bottom: 1rem; }
   .success-msg h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
   .success-msg p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
 
-  /* FOOTER */
   footer {
     border-top: 1px solid var(--border);
     padding: 1.5rem 2rem;
@@ -202,6 +245,7 @@
   footer a:hover { color: var(--text); }
 
   @media (max-width: 600px) {
+    .tiers { grid-template-columns: 1fr; }
     .field-row { grid-template-columns: 1fr; }
     .form-card { padding: 1.5rem; }
     .page { padding: 2.5rem 1.25rem 4rem; }
@@ -219,7 +263,30 @@
   <div class="headline">
     <span class="eyebrow">Publisher Listings</span>
     <h1>Reach people who are <em>actually curious.</em></h1>
-    <p class="sub">Skppr puts your site in front of users actively looking for something new. Fill out the form — we'll review and be in touch within 48 hours.</p>
+    <p class="sub">Skppr puts your site in front of users actively looking for something new. Pick a plan, fill out the form — we review every submission within 48 hours.</p>
+  </div>
+
+  <!-- Tier selector -->
+  <div class="tiers">
+    <div class="tier" id="tier-listed" onclick="selectTier('listed')">
+      <div class="tier-name">Listed</div>
+      <div class="tier-price">$199</div>
+      <div class="tier-period">per year</div>
+      <div class="tier-feature">Standard rotation in the Skppr index</div>
+    </div>
+    <div class="tier featured" id="tier-featured" onclick="selectTier('featured')">
+      <div class="tier-badge">Popular</div>
+      <div class="tier-name">Featured</div>
+      <div class="tier-price">$499</div>
+      <div class="tier-period">per year</div>
+      <div class="tier-feature">2x rotation · appear in 2 categories</div>
+    </div>
+    <div class="tier" id="tier-sponsored" onclick="selectTier('sponsored')">
+      <div class="tier-name">Sponsored</div>
+      <div class="tier-price">$999</div>
+      <div class="tier-period">per year</div>
+      <div class="tier-feature">Full-page card every 5th skip · max visibility</div>
+    </div>
   </div>
 
   <div class="form-card">
@@ -267,16 +334,25 @@
               <option>Philosophy</option>
               <option>Business</option>
               <option>Weird</option>
+              <option>AI Tools</option>
+              <option>Coding / Dev</option>
+              <option>Cybersecurity</option>
+              <option>Humor / WTF</option>
+              <option>Health & Fitness</option>
+              <option>Finance & Investing</option>
+              <option>Sustainability & Climate</option>
+              <option>No-Code / Indie Makers</option>
+              <option>Architecture & Urban Design</option>
+              <option>Podcasts & Audio</option>
               <option>Other</option>
             </select>
           </div>
           <div class="field">
-            <label>Listing Type</label>
-            <select name="plan" required>
+            <label>Plan</label>
+            <select name="plan" id="planSelect" required>
               <option value="" disabled selected>Select plan</option>
-              <option value="fan">Fan — $49/year</option>
-              <option value="basic">Basic — $199/year</option>
-              <option value="priority">Priority — $499/year</option>
+              <option value="listed">Listed — $199/year</option>
+              <option value="featured">Featured — $499/year</option>
               <option value="sponsored">Sponsored — $999/year</option>
             </select>
           </div>
@@ -307,6 +383,12 @@
 </footer>
 
 <script>
+  function selectTier(tier) {
+    document.querySelectorAll('.tier').forEach(function(t) { t.classList.remove('selected'); });
+    document.getElementById('tier-' + tier).classList.add('selected');
+    document.getElementById('planSelect').value = tier;
+  }
+
   document.getElementById('publisherForm').onsubmit = function(e) {
     e.preventDefault();
     var btn = document.getElementById('submitBtn');
@@ -314,11 +396,8 @@
     btn.textContent = 'Sending...';
 
     var form = e.target;
-
     var rawUrl = form.url.value.trim();
-    if (rawUrl && !/^https?:\/\//i.test(rawUrl)) {
-      rawUrl = 'https://' + rawUrl;
-    }
+    if (rawUrl && !/^https?:\/\//i.test(rawUrl)) rawUrl = 'https://' + rawUrl;
     try { new URL(rawUrl); } catch(_) {
       alert('Please enter a valid website URL.');
       btn.disabled = false;
