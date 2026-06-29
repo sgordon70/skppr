@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skppr Pro — Browse Without Limits</title>
+<title>Skppr Pro — Discover More, Your Way</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
@@ -11,9 +11,11 @@
     --bg: #0a0a0f;
     --surface: #13131a;
     --accent: #6c63ff;
+    --accent2: #ff6584;
     --text: #f0f0f8;
     --muted: #6b6b8a;
     --border: #2a2a3d;
+    --success: #63ffb4;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -53,7 +55,7 @@
   .nav-link:hover { color: var(--text); }
 
   .page {
-    max-width: 560px;
+    max-width: 520px;
     margin: 0 auto;
     padding: 4rem 2rem 5rem;
     text-align: center;
@@ -77,7 +79,10 @@
     margin-bottom: 0.75rem;
   }
 
-  h1 em { font-style: normal; color: var(--accent); }
+  h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
 
   .sub {
     font-size: 1rem;
@@ -104,29 +109,38 @@
     border-radius: 12px;
     padding: 1rem 1.25rem;
     font-size: 0.95rem;
+    color: var(--text);
   }
 
-  .feature-icon { font-size: 1.25rem; flex-shrink: 0; }
+  .feature-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
 
-  .feature-text strong { display: block; font-weight: 600; margin-bottom: 0.1rem; }
-  .feature-text span { font-size: 0.825rem; color: var(--muted); }
+  .feature-text strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.1rem;
+  }
 
-  /* Pricing toggle */
-  .toggle-wrap {
+  .feature-text span {
+    font-size: 0.825rem;
+    color: var(--muted);
+  }
+
+  .price-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     font-size: 0.875rem;
+    color: var(--muted);
   }
-
-  .toggle-label { color: var(--muted); }
-  .toggle-label.active { color: var(--text); font-weight: 600; }
 
   .save-badge {
     background: rgba(99,255,180,0.15);
-    color: #63ffb4;
+    color: var(--success);
     font-size: 0.65rem;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -135,30 +149,29 @@
     border-radius: 100px;
   }
 
-  .toggle {
-    width: 44px;
-    height: 24px;
+  .toggle-switch {
+    width: 40px;
+    height: 22px;
     background: var(--accent);
     border-radius: 100px;
-    border: none;
-    cursor: pointer;
     position: relative;
-    transition: background 0.15s;
+    cursor: pointer;
+    transition: background 0.2s;
   }
 
-  .toggle::after {
+  .toggle-switch::after {
     content: '';
     position: absolute;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     background: white;
     border-radius: 50%;
     top: 3px;
     left: 3px;
-    transition: transform 0.15s;
+    transition: transform 0.2s;
   }
 
-  .toggle.monthly::after { transform: translateX(20px); }
+  .toggle-switch.monthly::after { transform: translateX(18px); }
 
   .price-card {
     background: var(--surface);
@@ -193,7 +206,11 @@
     margin-bottom: 0.25rem;
   }
 
-  .price-period { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.75rem; }
+  .price-period {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1.75rem;
+  }
 
   .cta-btn {
     display: block;
@@ -212,6 +229,12 @@
     text-align: center;
   }
   .cta-btn:hover { background: #7d75ff; transform: translateY(-1px); }
+
+  .guarantee {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.85rem;
+  }
 
   footer {
     border-top: 1px solid var(--border);
@@ -240,91 +263,99 @@
 
 <div class="page">
   <span class="eyebrow">Skppr Pro</span>
-  <h1>Browse <em>without limits.</em></h1>
-  <p class="sub">Upgrade to Pro and get the full Skppr experience — no caps, no interruptions, just discovery.</p>
+  <h1>Discovery on <em>your terms.</em></h1>
+  <p class="sub">Pro gives you deeper control over what you find, how you find it, and how you save it. Built for people who take wandering seriously.</p>
 
   <div class="features">
     <div class="feature">
-      <div class="feature-icon">∞</div>
+      <div class="feature-icon">⚖️</div>
       <div class="feature-text">
-        <strong>Unlimited Skips</strong>
-        <span>No daily cap. Skip as much as you want, whenever you want.</span>
+        <strong>Weighted Categories</strong>
+        <span>Dial in your mix. Tell Skppr you want 70% Tech and 30% Weird — and that's exactly what you get.</span>
       </div>
     </div>
     <div class="feature">
-      <div class="feature-icon">🚫</div>
+      <div class="feature-icon">🕓</div>
       <div class="feature-text">
-        <strong>No Sponsored Cards</strong>
-        <span>Pure discovery. No ads, no sponsored slots in your feed.</span>
+        <strong>Skip History</strong>
+        <span>See the last 20 sites you've visited through Skppr. Go back to that thing you didn't save in time.</span>
       </div>
     </div>
     <div class="feature">
       <div class="feature-icon">🔖</div>
       <div class="feature-text">
-        <strong>Save Sites</strong>
-        <span>Bookmark anything you want to revisit later.</span>
+        <strong>Unlimited Saves</strong>
+        <span>Bookmark as many sites as you want. Your personal library of the best of the web.</span>
       </div>
     </div>
     <div class="feature">
       <div class="feature-icon">🎛️</div>
       <div class="feature-text">
-        <strong>Category Filters</strong>
-        <span>Skip only what you care about. Lock in your interests.</span>
+        <strong>Advanced Category Filters</strong>
+        <span>Filter by multiple categories at once. Fine-tune exactly what kind of sites appear in your rotation.</span>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🔥</div>
+      <div class="feature-text">
+        <strong>Discovery Streaks</strong>
+        <span>Track how many days in a row you've explored. Build a habit worth keeping.</span>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-text">
+        <strong>Early Access to New Categories</strong>
+        <span>Pro members get new categories before anyone else. You shape where Skppr goes next.</span>
       </div>
     </div>
   </div>
 
-  <!-- Pricing toggle -->
-  <div class="toggle-wrap">
-    <span class="toggle-label" id="label-annual">Annual <span class="save-badge">Save 20%</span></span>
-    <button class="toggle" id="toggleBtn" onclick="switchPlan()"></button>
-    <span class="toggle-label monthly active" id="label-monthly">Monthly</span>
+  <div class="price-toggle">
+    <span id="label-annual" style="color: var(--text);">Annual <span class="save-badge">Save 20%</span></span>
+    <div class="toggle-switch" id="toggleSwitch"></div>
+    <span id="label-monthly">Monthly</span>
   </div>
 
   <div class="price-card">
     <div class="price-badge">Most Popular</div>
-    <div class="price-amount" id="priceAmount">$3<span style="font-size:1.5rem">/mo</span></div>
-    <div class="price-period" id="pricePeriod">Billed monthly · cancel anytime</div>
+    <div class="price-amount" id="priceAmount">$2<span style="font-size:1.5rem">.42/mo</span></div>
+    <div class="price-period" id="pricePeriod">$29 billed annually · cancel anytime</div>
     <a href="https://buy.stripe.com/7sY8wO45jaL98xQ42Tgw000" class="cta-btn" id="proBtn">Get Skppr Pro →</a>
+    <p class="guarantee">30-day money-back guarantee. No questions asked.</p>
   </div>
 </div>
 
 <footer>
   <span>© 2026 Skppr</span>
-  <a href="mailto:scott@blackhookgroup.com">Contact</a>
+  <a href="mailto:hello@tryskppr.com">Contact</a>
   <a href="https://www.freeprivacypolicy.com/live/3c5651d1-63eb-43f7-911c-e551043bd4cb" target="_blank">Privacy Policy</a>
 </footer>
 
 <script>
-  var isMonthly = true;
-  var monthlyLink = 'https://buy.stripe.com/7sY8wO45jaL98xQ42Tgw000';
-  var annualLink = 'https://buy.stripe.com/4gM14mfO1bPd5lEeHxgw004';
+  var isMonthly = false;
+  var toggle = document.getElementById('toggleSwitch');
+  var amount = document.getElementById('priceAmount');
+  var period = document.getElementById('pricePeriod');
+  var labelAnnual = document.getElementById('label-annual');
+  var labelMonthly = document.getElementById('label-monthly');
 
-  function switchPlan() {
+  toggle.addEventListener('click', function() {
     isMonthly = !isMonthly;
-    var btn = document.getElementById('toggleBtn');
-    var amount = document.getElementById('priceAmount');
-    var period = document.getElementById('pricePeriod');
-    var proBtn = document.getElementById('proBtn');
-    var labelMonthly = document.getElementById('label-monthly');
-    var labelAnnual = document.getElementById('label-annual');
-
     if (isMonthly) {
-      btn.classList.add('monthly');
+      toggle.classList.add('monthly');
       amount.innerHTML = '$3<span style="font-size:1.5rem">/mo</span>';
       period.textContent = 'Billed monthly · cancel anytime';
-      proBtn.href = monthlyLink;
-      labelMonthly.classList.add('active');
-      labelAnnual.classList.remove('active');
+      labelAnnual.style.color = 'var(--muted)';
+      labelMonthly.style.color = 'var(--text)';
     } else {
-      btn.classList.remove('monthly');
-      amount.innerHTML = '$29<span style="font-size:1.5rem">/yr</span>';
-      period.textContent = 'Billed annually · cancel anytime';
-      proBtn.href = annualLink;
-      labelAnnual.classList.add('active');
-      labelMonthly.classList.remove('active');
+      toggle.classList.remove('monthly');
+      amount.innerHTML = '$2<span style="font-size:1.5rem">.42/mo</span>';
+      period.textContent = '$29 billed annually · cancel anytime';
+      labelAnnual.style.color = 'var(--text)';
+      labelMonthly.style.color = 'var(--muted)';
     }
-  }
+  });
 </script>
 </body>
 </html>
